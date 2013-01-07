@@ -1,0 +1,38 @@
+
+ 
+System V AMD64 ABI Argument Passing
+
+ callee( edi, rsi, rdx, rcx, r8, r9, stack[0], stack[1], ... )
+
+ First six arguments are passed in registers, the rest on the stack.
+ 
+
+
+ Win64 Argument Passing
+
+ callee( rcx, rdx, r8, r9, stack[0], stack[1], ... )
+
+ First four arguments are passed in registers, the rest on the stack.
+
+ X64Function
+   push p6
+   push p5
+   mov r9,  p4  ; qword param
+   mov r8,  p3  ; qword param
+   mov rdx, p2  ; qword param, could have also used r7
+   mov rcx, p1  ; qword param, could have also used r6
+   call Function1
+
+ X64Function
+   push p6
+   push p5
+   mov r9b, p4  ; byte param
+   mov r8w, p3  ; word param
+   mov edx, p2  ; dword param, could have also used r7d
+   mov rcx, p1  ; qword param
+   call Function1
+
+
+ References:
+ http://eli.thegreenplace.net/2011/09/06/stack-frame-layout-on-x86-64/
+ http://www.codemachine.com/article_x64deepdive.html
