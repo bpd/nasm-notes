@@ -6,15 +6,15 @@
 BITS 64
 default rel
 
-global _say_hello
-extern _printf
+global say_hello
+extern printf
 
 msg: db 'Hello from NASM!',10,0  ; terminated string with newline
 
 SECTION .text             ; win64 linking doesn't work if symbol is not
                           ; defined in .text section
 
-_say_hello:
+say_hello:
   
   push rbp      ; save the current base point
   mov  rbp,rsp  ; setup stack frame
@@ -24,7 +24,7 @@ _say_hello:
   ; printf("Hello from NASM!\n")
   lea rdi, [msg]  ; load the effective address of msg at runtime
   ;mov  rcx, rax       ; 
-  call _printf   ; call 
+  call printf   ; call 
   
   ;add  rsp, 32  ; clean up Register Parameter Area
   pop  rbp
