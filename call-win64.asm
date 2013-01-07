@@ -7,6 +7,8 @@ BITS 64
 global say_hello
 extern printf
 
+default rel
+
 msg: db 'Hello from NASM!',10,0  ; terminated string with newline
 
 SECTION .text             ; win64 linking doesn't work if symbol is not
@@ -20,7 +22,8 @@ say_hello:
                 ; 
   
   ; printf("Hello from NASM!\n")
-  mov  rcx, msg ; 
+  lea rcx, [msg]  ; load the effective address of msg at runtime
+  ;mov  rcx, rax       ; 
   call printf   ; call 
   
   add  rsp, 32  ; clean up Register Parameter Area
